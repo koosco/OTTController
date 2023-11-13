@@ -5,9 +5,13 @@
 int volumNum = A0;
 int vol_tmp = 0;
 int volumeChangeDiff = 5;
+int keyboardMute = 9;
 
 void setup() {
   Serial.begin(9600);
+
+  // keyboard 초기화
+  pinMode(keyboardMute, INPUT_PULLUP);
 }
 
 void loop() {
@@ -24,5 +28,12 @@ void loop() {
     Consumer.write(MEDIA_VOLUME_DOWN);
     vol_tmp = volumeVal;
   }
+
+  // Mute button -> This will be integrated to Volume Controller
+  
+  if(digitalRead(keyBoardMute) == LOW)
+    Keyboard.press('m');
+  else
+    Keyboard.release('m');
 }
 
