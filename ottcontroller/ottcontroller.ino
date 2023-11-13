@@ -16,6 +16,13 @@ int videoChangeDiff = 20;
 // var for LED
 int led = 12;
 
+// var for joystick
+int joyStickX = A1;
+int joyStickY = A2;
+int joyStickPinNum = 4;
+int mouseMoveLowerBound = 550;
+int mouseMoveUpperBound = 450;
+
 void setup() {
   Serial.begin(9600);
 
@@ -44,13 +51,14 @@ void loop() {
   }
 
   // Mute button -> This will be integrated to Volume Controller
-  
+
   if(digitalRead(keyBoardMute) == LOW)
     Keyboard.press('m');
   else
     Keyboard.release('m');
 
   // Video Control
+
   int videoVal = analogRead(videoNum);
 
   if(videoVal < video_tmp - videoChangeDiff) {
@@ -71,7 +79,31 @@ void loop() {
   else
     Keyboard.release(' ');
 
+
   // LED
   digitalWrite(led, HIGH);
+
+
+  // Mouse Control - mouse move
+
+  int mouseXVal = analogRead(joyStickX);
+  int mouseYVal = analogRead(joyStickY);
+  int mouseZVal = digitalRead(joyStickPinNum);
+
+  if(mouseMoveLowerBound < mouseXVal)
+    Mouse.move(0, 1);
+  else if(mouseXVal < mouseMoveUpperBound)
+    Mouse.move(0, -1);
+  
+  if(mouseMoveLowerBound < mouseYVal)
+    Mouse.move(-1, 0);
+  else if(mouseYVal < mouseMoveUpperBound)
+    Mouse.move(1, 0);
+
+  // Mouse Control - click button
+  if(mouseZVal == 0)
+    Mouse.press(MOUSE_LEFT);
+  if(mouseZVal == 1)
+    Mouse.release(MOUSE_LEFT);
 }
 
