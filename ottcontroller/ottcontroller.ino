@@ -13,12 +13,19 @@ int video_tmp = 0;
 int videoChangeDiff = 20;
 // int keyBoardStopResume = ; // stop/resume key
 
+// var for LED
+int led = 12;
+
 void setup() {
   Serial.begin(9600);
 
   // keyboard 초기화
   pinMode(keyboardMute, INPUT_PULLUP);
   pinMode(keyBoardStopResume, INPUT_PULLUP);
+
+  // LED
+  pinMode(led, OUTPUT);
+
 }
 
 void loop() {
@@ -63,5 +70,8 @@ void loop() {
     Keyboard.press(' ');
   else
     Keyboard.release(' ');
+
+  // LED
+  digitalWrite(led, HIGH);
 }
 
