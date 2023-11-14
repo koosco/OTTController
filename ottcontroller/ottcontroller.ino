@@ -106,5 +106,5 @@ void loop() {
   Serial.print(mouseZVal);
   if(mouseZVal == 1)
     Mouse.release(MOUSE_LEFT);
-  Serial.print(mouseZVal);
+  delay(1);
 }
