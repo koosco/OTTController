@@ -28,7 +28,7 @@ void setup() {
 
   // keyboard 초기화
   pinMode(keyboardMute, INPUT_PULLUP);
-  pinMode(keyBoardStopResume, INPUT_PULLUP);
+  // pinMode(keyBoardStopResume, INPUT_PULLUP);
 
   // LED
   pinMode(led, OUTPUT);
@@ -52,7 +52,7 @@ void loop() {
 
   // Mute button -> This will be integrated to Volume Controller
 
-  if(digitalRead(keyBoardMute) == LOW)
+  if(digitalRead(keyboardMute) == LOW)
     Keyboard.press('m');
   else
     Keyboard.release('m');
@@ -74,10 +74,10 @@ void loop() {
   }
 
   // Video stop/resume button -> This will be integrated to Video Controller
-  if(digitalRead(keyBoardMute) == LOW)
-    Keyboard.press(' ');
-  else
-    Keyboard.release(' ');
+  // if(digitalRead(keyboardMute) == LOW)
+  //   Keyboard.press(' ');
+  // else
+  //   Keyboard.release(' ');
 
 
   // LED
@@ -103,7 +103,8 @@ void loop() {
   // Mouse Control - click button
   if(mouseZVal == 0)
     Mouse.press(MOUSE_LEFT);
+  Serial.print(mouseZVal);
   if(mouseZVal == 1)
     Mouse.release(MOUSE_LEFT);
+  Serial.print(mouseZVal);
 }
-
